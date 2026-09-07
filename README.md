@@ -36,3 +36,13 @@ python -m build
 The project is feature-complete for its documented v1 scope. Maintenance focuses on correctness, security, compatibility, and well-supported input improvements.
 
 Part of the [Logan Pendragon Forge open-source collection](https://www.loganpendragonforge.com/open-source/). Licensed under the [MIT License](LICENSE).
+
+## Version 1.1.0: reviewed improvements
+
+Validate publishing fields and XHTML, add reusable publisher profiles and section ordering, and export direct XHTML/HTML/Markdown files.
+
+```bash
+ebook-front-matter examples/sample.json --format xhtml --output front.xhtml
+```
+
+Use `--format xhtml`, `html`, or `md` for direct documents instead of a report wrapper. `--profile publisher.json` loads local defaults for imprint, rights, isbn and author; explicit book input wins. `section_order` must list every available section exactly once (title, copyright, plus dedication/imprint when supplied). XHTML is checked for well-formed XML, not EPUB/store certification. Review prompts identify a defaulted rights statement or missing identifier; they do not determine legal sufficiency or identifier requirements. No publisher lookup or submission occurs.
