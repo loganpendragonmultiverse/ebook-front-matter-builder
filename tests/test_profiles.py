@@ -50,7 +50,7 @@ def test_profile_sections_direct_outputs_and_xml(tmp_path) -> None:
             )
             == 0
         )
-        assert output.read_text() == report[field]
+        assert output.read_text(encoding="utf-8") == report[field]
 
 
 @pytest.mark.parametrize(
