@@ -105,7 +105,7 @@ def _front_matter(data: dict[str, Any]) -> dict[str, Any]:
 
 def analyze(data: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(data, dict):
-        raise ValueError("input must be a JSON object")
+        raise TypeError("input must be a JSON object")
     return {"version": 1, "project": PROJECT, **_front_matter(data)}
 
 

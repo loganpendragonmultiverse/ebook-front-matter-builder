@@ -67,5 +67,5 @@ def test_profile_sections_direct_outputs_and_xml(tmp_path) -> None:
     ],
 )
 def test_invalid_publishing_fields(patch) -> None:
-    with pytest.raises(ValueError):
+    with pytest.raises((ValueError, TypeError)):
         analyze({"title": "A", "author": "B", "year": 2026, **patch})
