@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0 — 2026-10-15
+
+- Add ordered author, editor, translator, and illustrator credits to all document formats.
+- Preserve author-only inputs, publisher defaults, and section ordering.
+
 ## 1.1.0 - 2026-09-07
 
 - Validate publishing fields and XHTML, add reusable publisher profiles and section ordering, and export direct XHTML/HTML/Markdown files.
