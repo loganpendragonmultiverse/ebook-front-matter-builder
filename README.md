@@ -46,3 +46,15 @@ ebook-front-matter examples/sample.json --format xhtml --output front.xhtml
 ```
 
 Use `--format xhtml`, `html`, or `md` for direct documents instead of a report wrapper. `--profile publisher.json` loads local defaults for imprint, rights, isbn and author; explicit book input wins. `section_order` must list every available section exactly once (title, copyright, plus dedication/imprint when supplied). XHTML is checked for well-formed XML, not EPUB/store certification. Review prompts identify a defaulted rights statement or missing identifier; they do not determine legal sufficiency or identifier requirements. No publisher lookup or submission occurs.
+
+## Structured credits (1.2)
+
+An optional credits array contains objects with role and name fields. Supported
+roles are author, editor, translator, and illustrator; entries render in supplied
+order on the title page in all three formats. For example:
+    "credits": [{"role": "author", "name": "A. Writer"}, {"role": "editor", "name": "E. Reader"}]
+When author is omitted, author-role names supply the copyright byline. An explicit
+author (including a publisher-profile default) remains the copyright byline.
+Author-only inputs retain their original output. Credits do not add a section or
+change section_order. Names are escaped for HTML/XHTML, and XHTML is parsed for
+well-formedness. These checks do not certify EPUB compliance or legal sufficiency.

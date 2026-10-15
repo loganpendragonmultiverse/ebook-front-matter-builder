@@ -23,7 +23,27 @@ def _front_matter(data: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("profile supports imprint, rights, isbn and author only")
     data = {**profile, **data}
     title = _require(data, "title")
+    credits = data.get("credits")
+    if credits is not None:
+        if not isinstance(credits, list) or not credits:
+            raise ValueError("credits must be a nonempty array")
+        for index, credit in enumerate(credits):
+            if not isinstance(credit, dict) or set(credit) != {"role", "name"}:
+                raise ValueError(f"credits[{index}] requires role and name")
+            if credit["role"] not in ("author", "editor", "translator", "illustrator"):
+                raise ValueError(f"credits[{index}].role is unsupported")
+            name = credit["name"]
+            if (
+                not isinstance(name, str)
+                or not name.strip()
+                or any(ord(char) < 32 and char not in "\t\n\r" for char in name)
+            ):
+                raise ValueError(f"credits[{index}].name must be XML-compatible text")
+    if "author" not in data and credits:
+        data["author"] = ", ".join(c["name"] for c in credits if c["role"] == "author")
     author = _require(data, "author")
+    credit_lines = [f"{c['role'].title()}: {c['name']}" for c in credits] if credits else [author]
+    credit_html = "".join(f"<p>{escape(line)}</p>" for line in credit_lines)
     year = _require(data, "year")
     if not isinstance(year, int) or isinstance(year, bool) or not 1 <= year <= 9999:
         raise ValueError("year must be an integer from 1 through 9999")
@@ -39,7 +59,7 @@ def _front_matter(data: dict[str, Any]) -> dict[str, Any]:
     imprint = data.get("imprint", "").strip()
     copyright_text = f"Copyright © {year} {author}. {rights}" + (f" ISBN {isbn}." if isbn else "")
     xhtml_sections = {
-        "title": f'<section epub:type="titlepage"><h1>{escape(title)}</h1><p>{escape(author)}</p></section>',
+        "title": f'<section epub:type="titlepage"><h1>{escape(title)}</h1>{credit_html}</section>',
         "copyright": f'<section epub:type="copyright-page"><p>{escape(copyright_text)}</p></section>',
     }
     if dedication:
@@ -81,7 +101,7 @@ def _front_matter(data: dict[str, Any]) -> dict[str, Any]:
         + "</body></html>"
     )
     markdown = {
-        "title": f"# {title}\n\n{author}",
+        "title": f"# {title}\n\n" + "\n\n".join(credit_lines),
         "copyright": copyright_text,
         "dedication": dedication,
         "imprint": imprint,
