@@ -69,3 +69,6 @@ atomic defense against hostile leaf or parent-path replacement during the comman
 
 `examples/structured-credits.json` demonstrates credits, a publisher profile,
 and an explicit order for all available front-matter sections.
+
+Both JSON examples are included in source archives under `examples/` and in
+installed wheels under `share/doc/ebook-front-matter-builder/examples/`.
