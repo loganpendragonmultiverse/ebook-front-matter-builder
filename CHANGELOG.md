@@ -2,6 +2,8 @@
 
 ## 1.2.1 - 2026-10-20
 
+- Include the runnable JSON examples in installed wheels and source archives.
+
 - Reject malformed or blank required text with actionable errors before rendering.
 - Create report outputs exclusively, preserving existing files and dangling symlinks.
 - Extend regression coverage and package the complete developer handoff documentation.

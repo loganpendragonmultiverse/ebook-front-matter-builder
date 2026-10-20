@@ -38,3 +38,4 @@ addopts = "--cov=ebook_front_matter_builder --cov-branch --cov-report=term-missi
 
 [tool.setuptools.data-files]
 "share/doc/ebook-front-matter-builder" = ["README.md", "CHANGELOG.md", "DEVELOPMENT.md", "TESTING.md"]
+"share/doc/ebook-front-matter-builder/examples" = ["examples/sample.json", "examples/structured-credits.json"]
