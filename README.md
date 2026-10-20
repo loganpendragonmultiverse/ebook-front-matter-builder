@@ -64,8 +64,8 @@ well-formedness. These checks do not certify EPUB compliance or legal sufficienc
 The title and copyright byline must be non-empty strings; malformed publishing
 fields produce an actionable error before rendering. Output files are created exclusively:
 existing files and symbolic links are rejected, including dangling links. This
-protects the selected output leaf; it is not a guarantee against hostile changes
-to parent directories during the command. Inputs remain read-only.
+checks an existing output leaf and creates files exclusively; it is not an
+atomic defense against hostile leaf or parent-path replacement during the command. Inputs remain read-only.
 
 `examples/structured-credits.json` demonstrates credits, a publisher profile,
 and an explicit order for all available front-matter sections.
