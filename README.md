@@ -58,3 +58,14 @@ author (including a publisher-profile default) remains the copyright byline.
 Author-only inputs retain their original output. Credits do not add a section or
 change section_order. Names are escaped for HTML/XHTML, and XHTML is parsed for
 well-formedness. These checks do not certify EPUB compliance or legal sufficiency.
+
+## 1.2.1 validation and output safety
+
+The title and copyright byline must be non-empty strings; malformed publishing
+fields produce an actionable error before rendering. Output files are created exclusively:
+existing files and symbolic links are rejected, including dangling links. This
+protects the selected output leaf; it is not a guarantee against hostile changes
+to parent directories during the command. Inputs remain read-only.
+
+`examples/structured-credits.json` demonstrates credits, a publisher profile,
+and an explicit order for all available front-matter sections.

@@ -1,0 +1,25 @@
+{
+  "title": "Harbor & Glass",
+  "year": 2026,
+  "credits": [
+    {
+      "role": "author",
+      "name": "A. Writer"
+    },
+    {
+      "role": "editor",
+      "name": "E. Reader"
+    }
+  ],
+  "profile": {
+    "imprint": "Example Press",
+    "rights": "Example rights statement for review."
+  },
+  "dedication": "For the readers",
+  "section_order": [
+    "title",
+    "dedication",
+    "copyright",
+    "imprint"
+  ]
+}

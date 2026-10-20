@@ -23,6 +23,8 @@ def _front_matter(data: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("profile supports imprint, rights, isbn and author only")
     data = {**profile, **data}
     title = _require(data, "title")
+    if not isinstance(title, str) or not title.strip():
+        raise ValueError("title must be non-empty text")
     credits = data.get("credits")
     if credits is not None:
         if not isinstance(credits, list) or not credits:
@@ -42,6 +44,8 @@ def _front_matter(data: dict[str, Any]) -> dict[str, Any]:
     if "author" not in data and credits:
         data["author"] = ", ".join(c["name"] for c in credits if c["role"] == "author")
     author = _require(data, "author")
+    if not isinstance(author, str) or not author.strip():
+        raise ValueError("author must be non-empty text")
     credit_lines = [f"{c['role'].title()}: {c['name']}" for c in credits] if credits else [author]
     credit_html = "".join(f"<p>{escape(line)}</p>" for line in credit_lines)
     year = _require(data, "year")

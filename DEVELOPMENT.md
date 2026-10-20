@@ -11,3 +11,12 @@ Validate publishing fields and XHTML, add reusable publisher profiles and sectio
 Use `--format xhtml`, `html`, or `md` for direct documents instead of a report wrapper. `--profile publisher.json` loads local defaults for imprint, rights, isbn and author; explicit book input wins. `section_order` must list every available section exactly once (title, copyright, plus dedication/imprint when supplied). XHTML is checked for well-formed XML, not EPUB/store certification. Review prompts identify a defaulted rights statement or missing identifier; they do not determine legal sufficiency or identifier requirements. No publisher lookup or submission occurs.
 
 Local formatting, lint, strict types and regression tests pass. Public release completion requires the protected CI/CodeQL matrix, tagged artifacts and matching Forge catalog/detail deployment.
+
+## 1.2.1 acceptance
+
+Run the full formatting, lint, strict typing, coverage and build checks above.
+`tests/test_gold_validation.py` covers malformed input, successful fresh outputs,
+existing files, dangling links where supported, and unchanged input bytes.
+Install both built distributions outside the source tree and rerun the complete
+suite against the installed package. Confirm all four handoff documents and the
+license are present in the wheel/source distribution; exercise the installed CLI.
